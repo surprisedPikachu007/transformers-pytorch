@@ -2,6 +2,7 @@ import torch
 import torch.nn.functional as F
 import youtokentome
 import math
+import sys
 
 # Device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -134,4 +135,8 @@ def translate(source_sequence, beam_size=4, length_norm_coefficient=0.6):
 
 
 if __name__ == '__main__':
-    print(translate("Anyone who retains the ability to recognise beauty will never become old."))
+    if len(sys.argv) != 2:
+        print("Usage: python translate.py <source_sequence>")
+        sys.exit(1)
+    source_sequence = sys.argv[1]
+    print(translate(source_sequence))
