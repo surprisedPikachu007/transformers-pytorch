@@ -11,7 +11,7 @@ def prepare_data(data_folder, min_length=3, max_length=100,
                  max_length_ratio=1.5, retain_case=True):
     # BPE
     print("\nLearning BPE...")
-    youtokentome.BPE.train(data=os.path.join(data_folder, "tam-eng-small.tsv"), vocab_size=37000,
+    youtokentome.BPE.train(data=os.path.join(data_folder, "tam-eng.tsv"), vocab_size=37000,
                             model=os.path.join(data_folder, "bpe.model"))
     
     # Load BPE model
@@ -20,7 +20,7 @@ def prepare_data(data_folder, min_length=3, max_length=100,
 
     # Read English, Tamil
     print("\nRe-reading single files...")
-    with codecs.open(os.path.join(data_folder, "tam-eng-small.tsv"), "r", encoding="utf-8") as f:
+    with codecs.open(os.path.join(data_folder, "tam-eng.tsv"), "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     # Filter

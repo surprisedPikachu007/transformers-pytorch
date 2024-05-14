@@ -22,17 +22,17 @@ positional_encoding = get_positional_encoding(d_model=d_model,
 
 # Learning parameters
 checkpoint = None  # path to model checkpoint, None if none
-tokens_in_batch = 200  # batch size in target language tokens
-batches_per_step = 250 // tokens_in_batch  # perform a training step, i.e. update parameters, once every so many batches
+tokens_in_batch = 2000  # batch size in target language tokens
+batches_per_step = 25000 // tokens_in_batch  # perform a training step, i.e. update parameters, once every so many batches
 print_frequency = 20  # print status once every so many steps
-n_steps = 1000  # number of training steps
-warmup_steps = 80  # number of warmup steps where learning rate is increased linearly; twice the value in the paper, as in the official transformer repo.
+n_steps = 100000  # number of training steps
+warmup_steps = 8000  # number of warmup steps where learning rate is increased linearly; twice the value in the paper, as in the official transformer repo.
 step = 1  # the step number, start from 1 to prevent math error in the next line
 lr = get_lr(step=step, d_model=d_model,
             warmup_steps=warmup_steps)  # see utils.py for learning rate schedule; twice the schedule in the paper, as in the official transformer repo.
 start_epoch = 0  # start at this epoch
 betas = (0.9, 0.98)  # beta coefficients in the Adam optimizer
-epsilon = 1e-3  # epsilon term in the Adam optimizer
+epsilon = 1e-9  # epsilon term in the Adam optimizer
 label_smoothing = 0.1  # label smoothing co-efficient in the Cross Entropy loss
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # CPU isn't really practical here
 cudnn.benchmark = False  # since input tensor size is variable
